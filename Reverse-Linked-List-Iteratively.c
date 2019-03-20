@@ -1,4 +1,4 @@
-// Program to Reverse the Linked List.
+// Program to Reverse the Linked List Iteratively
 
 #include<stdio.h>
 #include<conio.h>
