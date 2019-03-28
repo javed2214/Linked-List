@@ -43,8 +43,7 @@ node *reverseList(node *head){
 
 	node *temp,*p=head;
 	
-	if(head==NULL) return NULL;
-	if(head->right==NULL) return head;
+	if(head==NULL or head->right==NULL) return head;
 
 	while(p!=NULL){
 		temp=p->left;		// Node Swapping
