@@ -1,6 +1,6 @@
 // Reverse Linked List in Groups of Given Size
-// Inputs:  1->2->3->4->5->6->7->8->NULL and k = 3 
-// Output:  3->2->1->6->5->4->8->7->NULL
+// Inputs:  1->2->3->4->5->6->NULL and k = 3 
+// Output:  3->2->1->6->5->4->NULL
 // ***Asked in many Interviews
 
 #include<bits/stdc++.h>
@@ -50,7 +50,7 @@ node *createList(int *a, int n){
 
 int main(){
 
-	int a[]={1,2,3,4,5,6,7,8};
+	int a[]={1,2,3,4,5,6};
 	int n=sizeof(a)/sizeof(int);
 
 	int k=3;
