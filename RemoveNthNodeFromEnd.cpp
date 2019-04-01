@@ -1,7 +1,5 @@
 // Program to Remove nth Node From End of the Linked List
 
-
-
 #include<bits/stdc++.h>
 using namespace std;
 
