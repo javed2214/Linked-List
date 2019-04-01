@@ -1,5 +1,7 @@
 // Program to Remove nth Node From End of the Linked List
 
+
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -36,6 +38,7 @@ void traverseList(node *head){
 		cout<<p->data<<"->";
 		p=p->next;
 	}
+	cout<<"\n";
 }
 
 node *removeNthNode(node *head, int n){
@@ -46,7 +49,7 @@ node *removeNthNode(node *head, int n){
 	while(n--)
 		cur=cur->next;
 
-	if(cur==NULL)
+	if(cur==NULL)			// To Remove Head
 		return head->next;
 
 	while(cur->next!=NULL){
@@ -65,9 +68,10 @@ int main(){
 	int n=sizeof(a)/sizeof(int);
 	head=createList(a,n);
 	traverseList(head);
-	int k;cin>>k;
+	int k;
+	cout<<"Enter th Node: ";
+	cin>>k;
 	head=removeNthNode(head,k);
-	cout<<"\n";
 	traverseList(head);
 
 	return 0;
