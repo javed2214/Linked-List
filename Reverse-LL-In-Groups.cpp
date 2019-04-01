@@ -23,8 +23,8 @@ node *reverseInGroups(node *head, int k){
 		p=t2;
 		count++;
 	}
-	if(t2!=NULL)
-		head->next=reverseInGroups(t2,k);
+	if(p)
+		head->next=reverseInGroups(p,k);
 
 	return t1;
 }
