@@ -1,4 +1,5 @@
-// Program to Add Two Numbers Represented In the Form of Linked List
+// Program to Add Numbers Represented in the Form of Linked List
+// Output Should be in the Form of Linked List
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -8,18 +9,18 @@ typedef struct node{
 	struct node *next;
 }node;
 
-node *createList(std::vector<int> &a){
+node *createList(int *a, int n){
 
-	node *head=NULL,*temp=NULL;
-	for(int i=0;i<a.size();i++){
-		temp=(node *)malloc(sizeof(node));
+	node *head=NULL,*p;
+	for(int i=0;i<n;i++){
+		node *temp=(node *)malloc(sizeof(node));
 		temp->data=a[i];
 		temp->next=NULL;
 
 		if(head==NULL) head=temp;
 		else{
-			node *p=head;
-			while(p->next!=NULL)
+			p=head;
+			while(p->next)
 				p=p->next;
 			p->next=temp;
 		}
@@ -27,80 +28,105 @@ node *createList(std::vector<int> &a){
 	return head;
 }
 
-void displayList(node *head){
+void printList(node *head){
 
-	node *p=head;
-	while(p!=NULL){
-		cout<<p->data<<"=>";
-		p=p->next;
+	while(head){
+		cout<<head->data<<"=>";
+		head=head->next;
 	}
 	cout<<"\n";
 }
 
 node *reverseList(node *head){
 
-	node *t1=NULL,*t2=NULL,*p=head;
-	if(head==NULL) return NULL;
-	else{
-		while(p!=NULL){
-			t2=p->next;
-			p->next=t1;
-			t1=p;
-			p=t2;
-		}
+	node *p=head,*t1=NULL,*t2=NULL;
+	while(p){
+		t2=p->next;
+		p->next=t1;
+		t1=p;
+		p=t2;
 	}
 	return t1;
 }
 
-vector<int> addList(node *head1, node *head2){
+node *createNode(int n){
 
-	int sum=0,carry=0;
-	std::vector<int> v;
-	while(head1!=NULL or head2!=NULL){
+	node *head=new node;
+	head->data=n;
+	head->next=NULL;
 
-		if(head1!=NULL){
-			sum+=head1->data;
-			head1=head1->next;
+	return head;
+}
+
+node *addList(node *head1, node *head2){
+
+	node *head=NULL,*p,*temp;
+	int carry=0,x,sum;
+	while(head1 and head2){
+		
+		sum=head1->data+head2->data+carry;
+		
+		if(sum>=10) x=sum%10, carry=sum/10;
+		else x=sum, carry=0;
+		
+		temp=createNode(x);
+		
+		if(head==NULL) head=temp,p=head;
+		
+		else{
+			p->next=temp;
+			p=p->next;
 		}
-		if(head2!=NULL){
-			sum+=head2->data;
-			head2=head2->next;
-		}
-		sum+=carry;
-		v.push_back(sum%10);
-		carry=sum/10;
-		sum=0;
+		
+		head1=head1->next;
+		head2=head2->next;
 	}
-	if(carry) v.push_back(carry);
 
-	return v;
+	while(head1){
+		sum=head1->data+carry;
+		if(sum>=10) x=sum%10, carry=sum/10;
+		else x=sum, carry=0;
+
+		p->next=createNode(x);
+		p=p->next;
+		head1=head1->next;
+	}
+	while(head2){
+		sum=head2->data+carry;
+		if(sum>=10) x=sum%10, carry=sum/10;
+		else x=sum, carry=0;
+
+		p->next=createNode(x);
+		p=p->next;
+		head2=head2->next;
+	}
+	if(carry) p->next=createNode(carry);
+
+	return head;
 }
 
 int main(){
 
-	std::vector<int> a,b;
-	a={9,9,2,3,5,9,7,6,8};
-	b={9,9,6,7,8,4,6};
+	int a[]={9,8,2,7,3};
+	int n1=sizeof(a)/sizeof(int);
 
-	node *head1,*head2;
-	head1=createList(a);
-	head2=createList(b);
+	int b[]={2,9,5,2};
+	int n2=sizeof(b)/sizeof(int);
+
+	node *head1=createList(a,n1);
+	printList(head1);
+
+	node *head2=createList(b,n2);
+	printList(head2);
 
 	head1=reverseList(head1);
 	head2=reverseList(head2);
 
-	displayList(head1);
-	displayList(head2);
+	node *head=addList(head1,head2);
+	head=reverseList(head);
 
-	std::vector<int> v;
-	v=addList(head1,head2);
-	
-	node *res=createList(v);
-	res=reverseList(res);
-
-	cout<<"Result: ";
-	displayList(res);
-
+	cout<<"Sum: ";
+	printList(head);
 
 	return 0;
 }
