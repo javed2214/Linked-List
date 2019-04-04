@@ -44,18 +44,12 @@ void traverseList(node *head){
 
 node *removeDuplicateNodes(node *head){
 
-	node *p=head,*q;
-	while(p and p->next){
-		if(p->data==p->next->data){
-			q=p->next->next;
-			if(q==NULL){
-				p->next=NULL;
-				break;
-			}
-			p->next=q;
-		}
-		if(p->data!=p->next->data)
-			p=p->next;
+	node *p=head;
+	
+	while(p!=NULL){
+		while(p->next!=NULL and p->data==p->next->data)
+			p->next=p->next->next;
+		p=p->next;
 	}
 	return head;
 }
