@@ -16,8 +16,8 @@ public:
         return NULL;
     }
     
-    ListNode *detectCycle(ListNode *head) {
-        
+    ListNode *detectCycle(ListNode *head) {        // This function returns the Address of node from where the Loop starts if exist
+                                                   // else returns NULL
         ListNode *p;
         p=detectLoop(head);
         if(p==NULL) return NULL;
