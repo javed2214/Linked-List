@@ -2,31 +2,24 @@
 
 class Solution {
 public:
-    ListNode* mergeKLists(vector<ListNode*>&v) {
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+                
+        priority_queue<int, vector<int>, greater<int>> pq;
         
-        typedef pair<int,ListNode*>pi;
-        priority_queue<pi,vector<pi>,greater<pi>>pq;
-        for(int i=0;i<v.size();i++){
-            ListNode *p=v[i];
-            while(p!=NULL){
-                pq.push(make_pair(p->val,p));
-                p=p->next;
+        for(int i=0;i<lists.size();i++){
+            ListNode *head = lists[i];
+            while(head != NULL){
+                pq.push(head->val);
+                head = head->next;
             }
         }
-        ListNode* head=NULL;
-        ListNode *temp;
+        ListNode *head = NULL, *p = NULL;
         while(!pq.empty()){
-            temp=(ListNode *)malloc(sizeof(ListNode));
-            temp->val=pq.top().first;
-            temp=pq.top().second;
-            temp->next=NULL;
-            if(head==NULL)
-                head=temp;
+            ListNode *temp = new ListNode(pq.top());
+            if(head == NULL) head = temp, p = temp;
             else{
-                ListNode *p=head;
-                while(p->next!=NULL)
-                    p=p->next;
-                p->next=temp;
+                p->next = temp;
+                p = p->next;
             }
             pq.pop();
         }
