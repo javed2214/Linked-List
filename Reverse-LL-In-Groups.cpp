@@ -1,6 +1,6 @@
 // Reverse Linked List in Groups of Given Size
-// Inputs:  1->2->3->4->5->6->NULL and k = 3 
-// Output:  3->2->1->6->5->4->NULL
+// Inputs:  1->2->3->4->5 and k = 3 
+// Output:  3->2->1->5->4
 // ***Asked in many Interviews
 
 #include<bits/stdc++.h>
